@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React from 'react';  
 import { motion } from 'framer-motion';
 import { portfolio } from '@/data/portfolio';
 import { SpotlightCard } from '../ui/SpotlightCard';
