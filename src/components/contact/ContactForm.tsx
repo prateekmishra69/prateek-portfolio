@@ -26,10 +26,10 @@ const ContactForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Basic Client Validation
+    // Client Validation
     if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       setStatus('error');
-      setErrorMessage('All fields are required.');
+      setErrorMessage('Failed to send message.');
       return;
     }
 
@@ -48,17 +48,21 @@ const ContactForm = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to send message.');
+        console.error('[ContactForm] Server Error:', data.error || 'Failed to send message.');
+        setStatus('error');
+        setErrorMessage('Failed to send message.');
+        return;
       }
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
 
-      // Reset after 3 seconds
-      setTimeout(() => setStatus('idle'), 3000);
+      // Reset after 5 seconds
+      setTimeout(() => setStatus('idle'), 5000);
     } catch (error: any) {
+      console.error('[ContactForm] Network Exception:', error);
       setStatus('error');
-      setErrorMessage(error.message || 'Failed to send message. Please try again.');
+      setErrorMessage('Failed to send message.');
     }
   };
 
@@ -150,7 +154,7 @@ const ContactForm = () => {
       >
         {status === 'idle' && <><Send size={20} /> Send Message</>}
         {status === 'loading' && <><Loader2 size={20} className="animate-spin" /> Sending...</>}
-        {status === 'success' && <><CheckCircle size={20} className="text-green-400" /> Sent Successfully</>}
+        {status === 'success' && <><CheckCircle size={20} className="text-green-400" /> Message sent successfully.</>}
         {status === 'error' && <><Send size={20} /> Try Again</>}
       </MagneticButton>
     </form>

@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { resend } from '@/lib/resend';
+import { Resend } from 'resend';
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { name, email, subject, message } = body;
+    console.log('[Contact API] Request received');
 
-    // Server-side validation
+    const { name, email, subject, message } = await req.json();
+
     if (!name || !email || !subject || !message) {
       return NextResponse.json(
         { error: 'All fields are required.' },
@@ -14,56 +14,64 @@ export async function POST(req: Request) {
       );
     }
 
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-      return NextResponse.json(
-        { error: 'Invalid email address.' },
-        { status: 400 }
-      );
-    }
+    const apiKey = process.env.RESEND_API_KEY;
 
-    if (!resend) {
+    console.log('[Contact API] API Key Exists:', !!apiKey);
+
+    if (!apiKey) {
       return NextResponse.json(
-        { error: 'Server configuration error: RESEND_API_KEY is missing.' },
+        { error: 'RESEND_API_KEY is missing.' },
         { status: 500 }
       );
     }
 
-    // Basic sanitization
-    const sanitizedName = String(name).trim().slice(0, 100);
-    const sanitizedEmail = String(email).trim().slice(0, 100);
-    const sanitizedSubject = String(subject).trim().slice(0, 150);
-    const sanitizedMessage = String(message).trim().slice(0, 3000);
+    const resend = new Resend(apiKey);
 
-    // Send email via Resend
-    const data = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>', // Resend's default testing domain. In production, verified domain should be used.
-      to: 'prateekmmishra0412@gmail.com',
-      subject: `New Portfolio Message: ${sanitizedSubject}`,
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 10px;">
-          <h2 style="color: #333;">New Contact Message from Portfolio</h2>
-          <p style="margin-bottom: 5px;"><strong>Name:</strong> ${sanitizedName}</p>
-          <p style="margin-bottom: 5px;"><strong>Email:</strong> ${sanitizedEmail}</p>
-          <p style="margin-bottom: 20px;"><strong>Subject:</strong> ${sanitizedSubject}</p>
-          <hr style="border: none; border-top: 1px solid #eaeaea; margin: 20px 0;" />
-          <p style="margin-bottom: 10px;"><strong>Message:</strong></p>
-          <p style="white-space: pre-wrap; color: #555; line-height: 1.5;">${sanitizedMessage}</p>
-        </div>
+    const result = await resend.emails.send({
+      from: 'onboarding@resend.dev',
+      to: ['prateekmishra0412@gmail.com'],
+      subject: `Portfolio Contact: ${subject}`,
+      replyTo: email,
+      text: `
+Name: ${name}
+
+Email: ${email}
+
+Subject: ${subject}
+
+Message:
+${message}
       `,
     });
 
-    if (data.error) {
+    console.log('[Contact API] Full Resend Response:', result);
+
+    if (result.error) {
+      console.error('[Contact API] Resend Error:', result.error);
+
       return NextResponse.json(
-        { error: data.error.message },
+        {
+          error: result.error.message || 'Resend failed',
+          details: result.error,
+        },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ success: true, data });
-  } catch (error) {
-    console.error('Contact form API error:', error);
+    return NextResponse.json({
+      success: true,
+      id: result.data?.id,
+    });
+  } catch (err) {
+    console.error('[Contact API] Fatal Error:', err);
+
     return NextResponse.json(
-      { error: 'Failed to send message. Please try again later.' },
+      {
+        error:
+          err instanceof Error
+            ? err.message
+            : 'Unknown server error',
+      },
       { status: 500 }
     );
   }
