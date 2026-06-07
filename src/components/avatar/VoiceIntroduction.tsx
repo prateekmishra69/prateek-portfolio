@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useTTS } from '@/hooks/useTTS';
-import { Play, Volume2, VolumeX, Pause, Square } from 'lucide-react';
+import { Play, Volume2, VolumeX, Square } from 'lucide-react';
 
 interface VoiceIntroductionProps {
   onSpeakingChange: (isSpeaking: boolean) => void;
@@ -11,8 +11,7 @@ interface VoiceIntroductionProps {
 const introText = "Hi, I'm Prateek Mishra. I'm a Full Stack Developer, AWS Certified Cloud Practitioner, and Computer Science student at KL University. I build cloud-powered applications, AI-driven solutions, and scalable web platforms. Welcome to my portfolio.";
 
 const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange }) => {
-  const { play, pause, resume, stop, isSpeaking, isPaused, isMuted, toggleMute } = useTTS(introText);
-  const [hasHeardIntro, setHasHeardIntro] = useState<boolean>(false);
+  const { play, stop, isSpeaking, isMuted, toggleMute } = useTTS(introText);
   const [isBlocked, setIsBlocked] = useState<boolean>(false);
 
   useEffect(() => {
@@ -21,10 +20,7 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
 
   useEffect(() => {
     const heard = localStorage.getItem('hasHeardIntro') === 'true';
-    if (heard) {
-      setHasHeardIntro(true);
-      return;
-    }
+    if (heard) return;
 
     // Auto-play after 2 seconds
     const timer = setTimeout(() => {
@@ -32,7 +28,6 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
         onBlocked: () => setIsBlocked(true),
         onSuccess: () => {
           localStorage.setItem('hasHeardIntro', 'true');
-          setHasHeardIntro(true);
         }
       });
     }, 2000);
@@ -43,15 +38,13 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
     };
   }, [play, stop]);
 
-  const handleManualPlay = () => {
+  const handleManualAction = () => {
     if (isSpeaking) {
-      if (isPaused) resume();
-      else pause();
+      stop();
     } else {
       play({
         onSuccess: () => {
           localStorage.setItem('hasHeardIntro', 'true');
-          setHasHeardIntro(true);
         }
       });
     }
@@ -63,7 +56,6 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
       play({
         onSuccess: () => {
           localStorage.setItem('hasHeardIntro', 'true');
-          setHasHeardIntro(true);
         }
       });
     }
@@ -94,26 +86,16 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
       {/* Hero Buttons: Meet Prateek + Mute/Unmute */}
       <div className="flex flex-col gap-4 w-full items-center">
         <div className="flex items-center gap-3 w-full max-w-[320px] justify-center">
-          {/* Main Play/Pause/Replay Button */}
+          {/* Main Play/Stop Button */}
           <button 
-            onClick={handleManualPlay}
+            onClick={handleManualAction}
             className="flex-1 group relative flex items-center justify-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all px-6 py-4 rounded-full overflow-hidden text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,77,77,0.2)]"
           >
             <span className="relative z-10 flex items-center gap-2">
-              {isSpeaking && !isPaused ? (
+              {isSpeaking ? (
                 <>
-                  <Pause size={18} className="text-[#FF4D4D]" />
-                  <span className="text-[#FF4D4D]">Pause</span>
-                </>
-              ) : isSpeaking && isPaused ? (
-                <>
-                  <Play size={18} className="fill-current text-[#FF4D4D]" />
-                  <span className="text-[#FF4D4D]">Resume</span>
-                </>
-              ) : hasHeardIntro ? (
-                <>
-                  <Play size={18} className="fill-current" />
-                  Meet Prateek
+                  <Square size={16} className="fill-current text-[#FF4D4D]" />
+                  <span className="text-[#FF4D4D]">Stop</span>
                 </>
               ) : (
                 <>
@@ -143,8 +125,8 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
                 key={i} 
                 className="w-1.5 bg-[#FF4D4D] rounded-t-sm transition-all duration-100"
                 style={{ 
-                  height: isPaused ? '4px' : `${Math.random() * 100}%`,
-                  animation: isPaused ? 'none' : `waveform ${0.3 + i * 0.1}s infinite alternate` 
+                  height: `${Math.random() * 100}%`,
+                  animation: `waveform ${0.3 + i * 0.1}s infinite alternate` 
                 }}
               />
             ))}

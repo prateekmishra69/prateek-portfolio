@@ -78,7 +78,7 @@ const Hero = () => {
                 </MagneticButton>
               </a>
               
-              <a href="/resume/Prateek_Mishra_Resume.pdf" target="_blank" className="flex-1 sm:flex-none">
+              <a href="/resume/Prateek_Mishra_Resume.pdf" target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none">
                 <MagneticButton variant="outline" className="w-full">
                   <Download size={18} />
                   <span>Resume</span>

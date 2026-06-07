@@ -51,6 +51,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
 
   return (
     <motion.button
+      suppressHydrationWarning={true}
       ref={ref}
       onMouseMove={handleMouse}
       onMouseLeave={reset}
