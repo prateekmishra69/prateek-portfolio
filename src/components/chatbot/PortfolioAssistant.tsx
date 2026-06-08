@@ -61,7 +61,7 @@ const PortfolioAssistant = () => {
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0, opacity: 0, y: 20 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 md:bottom-10 md:right-10 w-16 h-16 bg-white/5 backdrop-blur-xl border border-white/20 text-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,77,77,0.3)] hover:border-[#FF4D4D]/50 transition-all duration-500 z-50 group hover:scale-110"
+            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-16 h-16 bg-white/5 backdrop-blur-xl border border-white/20 text-white rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)] hover:shadow-[0_0_40px_rgba(255,77,77,0.3)] hover:border-[#FF4D4D]/50 transition-all duration-500 z-50 group hover:scale-110"
           >
             <Bot size={28} className="text-white group-hover:text-[#FF4D4D] transition-colors" />
             
@@ -84,7 +84,7 @@ const PortfolioAssistant = () => {
             animate={{ opacity: 1, y: 0, scale: 1, height: isMinimized ? 'auto' : '500px' }}
             exit={{ opacity: 0, y: 50, scale: 0.95 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-6 right-6 md:bottom-10 md:right-10 w-[calc(100vw-3rem)] md:w-full max-w-[380px] bg-[#0a0a0a]/90 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden z-[100]"
+            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-[calc(100vw-2rem)] md:w-full max-w-[380px] bg-[#0a0a0a]/90 backdrop-blur-3xl border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] flex flex-col overflow-hidden z-[100]"
           >
             {/* Header */}
             <div className="bg-white/5 border-b border-white/10 p-4 flex items-center justify-between">

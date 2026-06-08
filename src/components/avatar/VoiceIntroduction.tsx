@@ -85,11 +85,11 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
 
       {/* Hero Buttons: Meet Prateek + Mute/Unmute */}
       <div className="flex flex-col gap-4 w-full items-center">
-        <div className="flex items-center gap-3 w-full max-w-[320px] justify-center">
-          {/* Main Play/Stop Button */}
+        <div className="relative flex items-center justify-center w-full py-2">
+          {/* Main Play/Stop Button perfectly centered */}
           <button 
             onClick={handleManualAction}
-            className="flex-1 group relative flex items-center justify-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all px-6 py-4 rounded-full overflow-hidden text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,77,77,0.2)]"
+            className="w-[220px] group relative flex items-center justify-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all px-6 py-4 rounded-full overflow-hidden text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,77,77,0.2)] z-10"
           >
             <span className="relative z-10 flex items-center gap-2">
               {isSpeaking ? (
@@ -107,14 +107,16 @@ const VoiceIntroduction: React.FC<VoiceIntroductionProps> = ({ onSpeakingChange 
             <div className="absolute inset-0 bg-gradient-to-r from-[#FF4D4D]/0 via-[#FF4D4D]/20 to-[#FF4D4D]/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
           </button>
 
-          {/* Mute/Unmute Button */}
-          <button
-            onClick={toggleMute}
-            className="relative flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all w-14 h-14 rounded-full overflow-hidden text-white shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,77,77,0.2)]"
-            title={isMuted ? "Unmute" : "Mute"}
-          >
-            {isMuted ? <VolumeX size={20} className="text-white/50" /> : <Volume2 size={20} className="text-white" />}
-          </button>
+          {/* Mute/Unmute Button snug right next to it */}
+          <div className="absolute left-[50%] ml-[110px] pl-3 flex items-center z-20">
+            <button
+              onClick={toggleMute}
+              className="relative flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all w-12 h-12 rounded-full overflow-hidden text-white shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(255,77,77,0.2)]"
+              title={isMuted ? "Unmute" : "Mute"}
+            >
+              {isMuted ? <VolumeX size={18} className="text-white/50" /> : <Volume2 size={18} className="text-white" />}
+            </button>
+          </div>
         </div>
 
         {/* Waveform indicator centered below the buttons */}

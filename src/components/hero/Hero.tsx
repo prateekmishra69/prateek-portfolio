@@ -98,7 +98,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="w-full lg:w-[45%] flex justify-center lg:justify-end z-20 mt-8 lg:mt-0"
+          className="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-16 xl:pr-24 z-20 mt-8 lg:mt-0"
           onMouseEnter={() => setIsAvatarHovered(true)}
           onMouseLeave={() => setIsAvatarHovered(false)}
         >
