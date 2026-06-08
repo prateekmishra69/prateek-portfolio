@@ -1,77 +1,67 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
   try {
     console.log('[Contact API] Request received');
+    
+    const body = await req.json();
+    const { name, email, subject, message } = body;
 
-    const { name, email, subject, message } = await req.json();
-
+    // Server-side validation
     if (!name || !email || !subject || !message) {
+      console.error('[Contact API] Validation failed: Missing fields');
       return NextResponse.json(
         { error: 'All fields are required.' },
         { status: 400 }
       );
     }
 
-    const apiKey = process.env.RESEND_API_KEY;
-
-    console.log('[Contact API] API Key Exists:', !!apiKey);
-
-    if (!apiKey) {
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      console.error('[Contact API] Validation failed: Invalid email format');
       return NextResponse.json(
-        { error: 'RESEND_API_KEY is missing.' },
+        { error: 'Invalid email address.' },
+        { status: 400 }
+      );
+    }
+
+    const emailUser = process.env.EMAIL_USER;
+    const emailPass = process.env.EMAIL_PASS;
+
+    if (!emailUser || !emailPass) {
+      console.error('[Contact API] Server configuration error: EMAIL_USER or EMAIL_PASS is missing');
+      return NextResponse.json(
+        { error: 'Server configuration error: Email credentials missing.' },
         { status: 500 }
       );
     }
 
-    const resend = new Resend(apiKey);
-
-    const result = await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: ['prateekmishra0412@gmail.com'],
-      subject: `Portfolio Contact: ${subject}`,
-      replyTo: email,
-      text: `
-Name: ${name}
-
-Email: ${email}
-
-Subject: ${subject}
-
-Message:
-${message}
-      `,
-    });
-
-    console.log('[Contact API] Full Resend Response:', result);
-
-    if (result.error) {
-      console.error('[Contact API] Resend Error:', result.error);
-
-      return NextResponse.json(
-        {
-          error: result.error.message || 'Resend failed',
-          details: result.error,
-        },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({
-      success: true,
-      id: result.data?.id,
-    });
-  } catch (err) {
-    console.error('[Contact API] Fatal Error:', err);
-
-    return NextResponse.json(
-      {
-        error:
-          err instanceof Error
-            ? err.message
-            : 'Unknown server error',
+    // Configure Nodemailer transporter for Gmail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: emailUser,
+        pass: emailPass,
       },
+    });
+
+    console.log('[Contact API] Attempting to send email via Nodemailer...');
+    
+    // Send email
+    const info = await transporter.sendMail({
+      from: `"${name} (Portfolio)" <${emailUser}>`,
+      replyTo: email,
+      to: 'prateekmishra0412@gmail.com',
+      subject: 'New Portfolio Contact Message',
+      text: `Name:\n${name}\n\nEmail:\n${email}\n\nSubject:\n${subject}\n\nMessage:\n${message}`,
+    });
+
+    console.log('[Contact API] Email sent successfully:', info.messageId);
+    return NextResponse.json({ success: true, messageId: info.messageId });
+  } catch (error: any) {
+    console.error('[Contact API] Uncaught server error:', error);
+    return NextResponse.json(
+      { error: error.message || 'Failed to send message.' },
       { status: 500 }
     );
   }
