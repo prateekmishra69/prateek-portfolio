@@ -98,23 +98,25 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="w-full lg:w-[45%] flex flex-col items-center lg:items-end justify-center z-20 gap-6 mt-8 lg:mt-0"
+          className="w-full lg:w-[45%] flex justify-center lg:justify-end z-20 mt-8 lg:mt-0"
           onMouseEnter={() => setIsAvatarHovered(true)}
           onMouseLeave={() => setIsAvatarHovered(false)}
         >
-          {/* Glassmorphism Frame for Avatar */}
-          <div className="relative p-2 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-2xl shadow-2xl group">
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#FF4D4D]/20 to-[#7928CA]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl blur-2xl -z-10" />
-            <TalkingAvatar 
-              imageUrl="/images/prateek-profile.jpg" 
-              isSpeaking={isSpeaking} 
-              className="w-[280px] sm:w-[350px] lg:w-[400px] 2xl:w-[500px] 3xl:w-[600px]"
-            />
-          </div>
-          
-          {/* Voice Intro Component (Meet Prateek) */}
-          <div className="w-[280px] sm:w-[350px] lg:w-[400px] 2xl:w-[500px] 3xl:w-[600px] flex justify-center">
-            <VoiceIntroduction onSpeakingChange={setIsSpeaking} />
+          <div className="flex flex-col items-center gap-6">
+            {/* Glassmorphism Frame for Avatar */}
+            <div className="relative p-2 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-2xl shadow-2xl group">
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#FF4D4D]/20 to-[#7928CA]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl blur-2xl -z-10" />
+              <TalkingAvatar 
+                imageUrl="/images/prateek-profile.jpg" 
+                isSpeaking={isSpeaking} 
+                className="w-[280px] sm:w-[350px] lg:w-[400px] 2xl:w-[500px] 3xl:w-[600px]"
+              />
+            </div>
+            
+            {/* Voice Intro Component (Meet Prateek) */}
+            <div className="w-full flex justify-center">
+              <VoiceIntroduction onSpeakingChange={setIsSpeaking} />
+            </div>
           </div>
         </motion.div>
 
