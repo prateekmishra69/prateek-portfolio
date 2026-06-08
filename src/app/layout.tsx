@@ -10,8 +10,9 @@ import Navigation from "@/components/ui/Navigation";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Prateek Mishra | Creative Developer",
-  description: "Portfolio of Prateek Mishra - Full Stack Developer and AI Enthusiast",
+  title: "Prateek Mishra | Full Stack Developer",
+  description: "AWS Certified Cloud Practitioner | Full Stack Developer | AI & ML Enthusiast",
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
