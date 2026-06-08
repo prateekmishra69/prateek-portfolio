@@ -11,12 +11,12 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-24 relative z-10">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-black mb-16 tracking-tighter"
+          className="text-4xl md:text-5xl 2xl:text-6xl font-black mb-16 2xl:mb-20 3xl:mb-24 tracking-tighter"
         >
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">Experience.</span>
         </motion.h2>
@@ -37,21 +37,21 @@ const Experience = () => {
                 </div>
               </div>
 
-              <SpotlightCard className="p-8 backdrop-blur-xl">
+              <SpotlightCard className="p-8 3xl:p-12 backdrop-blur-xl">
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-2">
                   <div>
-                    <h3 className="text-2xl font-bold text-white">{exp.role}</h3>
-                    <p className="text-lg text-[#F9CB28] font-medium">{exp.company}</p>
+                    <h3 className="text-2xl 3xl:text-3xl font-bold text-white">{exp.role}</h3>
+                    <p className="text-lg 3xl:text-xl text-[#F9CB28] font-medium">{exp.company}</p>
                   </div>
-                  <span className="text-white/40 text-sm font-medium px-3 py-1 bg-white/5 rounded-full w-fit">
+                  <span className="text-white/40 text-sm 3xl:text-base font-medium px-3 py-1 3xl:px-4 3xl:py-2 bg-white/5 rounded-full w-fit">
                     {exp.duration}
                   </span>
                 </div>
                 
                 <div className="mt-6 space-y-4">
                   <div>
-                    <h4 className="text-sm font-semibold text-white/50 uppercase tracking-wider mb-2">Key Responsibilities</h4>
-                    <ul className="list-disc list-inside text-white/70 space-y-1">
+                    <h4 className="text-sm 3xl:text-base font-semibold text-white/50 uppercase tracking-wider mb-2">Key Responsibilities</h4>
+                    <ul className="list-disc list-inside text-white/70 3xl:text-lg space-y-1 3xl:space-y-2">
                       {exp.responsibilities.map((req, rIdx) => (
                         <li key={rIdx}>{req}</li>
                       ))}

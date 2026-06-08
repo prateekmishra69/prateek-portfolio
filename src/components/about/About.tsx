@@ -10,17 +10,17 @@ const About = () => {
 
   return (
     <section id="about" className="py-24 relative z-10">
-      <div className="container mx-auto px-6 max-w-7xl">
+      <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px]">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="mb-16"
+          className="mb-16 2xl:mb-20 3xl:mb-24"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/50">My Story.</span>
           </h2>
-          <p className="text-xl text-white/60 max-w-3xl leading-relaxed">
+          <p className="text-xl 3xl:text-2xl text-white/60 max-w-3xl 2xl:max-w-5xl 3xl:max-w-6xl leading-relaxed">
             {aboutContent.professionalSummary}
           </p>
         </motion.div>
@@ -34,9 +34,9 @@ const About = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ delay: idx * 0.1 }}
             >
-              <SpotlightCard className="h-full p-8 md:p-10 backdrop-blur-xl">
-                <h3 className="text-2xl font-bold mb-4 text-white group-hover:text-[#FF4D4D] transition-colors">{section.title}</h3>
-                <p className="text-white/60 leading-relaxed text-lg">{section.content}</p>
+              <SpotlightCard className="h-full p-8 md:p-10 2xl:p-12 3xl:p-16 backdrop-blur-xl">
+                <h3 className="text-2xl 3xl:text-4xl font-bold mb-4 3xl:mb-6 text-white group-hover:text-[#FF4D4D] transition-colors">{section.title}</h3>
+                <p className="text-white/60 leading-relaxed text-lg 3xl:text-xl">{section.content}</p>
               </SpotlightCard>
             </motion.div>
           ))}

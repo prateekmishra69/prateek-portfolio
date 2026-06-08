@@ -14,8 +14,8 @@ const Projects = () => {
       {/* Decor */}
       <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-blue-600/10 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <div className="mb-20">
+      <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10">
+        <div className="mb-20 2xl:mb-24 3xl:mb-32">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -35,7 +35,7 @@ const Projects = () => {
           </motion.h3>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 3xl:grid-cols-3 gap-8 2xl:gap-12">
           {portfolio.projects.map((project, index) => (
             <ProjectCard 
               key={project.name} 

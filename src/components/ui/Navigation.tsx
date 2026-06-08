@@ -34,13 +34,13 @@ const Navigation = () => {
           isScrolled ? 'bg-black/50 backdrop-blur-xl border-b border-white/5 py-4' : 'bg-transparent py-8'
         }`}
       >
-        <div className="container mx-auto px-6 max-w-7xl flex items-center justify-between">
+        <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] flex items-center justify-between transition-all duration-500">
           <a href="#" className="text-2xl font-black text-white tracking-tighter">
             PM<span className="text-[#FF4D4D]">.</span>
           </a>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-10 2xl:gap-12 3xl:gap-16">
             {navLinks.map((link) => (
               <a 
                 key={link.name} 

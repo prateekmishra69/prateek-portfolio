@@ -61,7 +61,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, index }) =>
         <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
         {/* Image Showcase */}
-        <div className="relative h-72 overflow-hidden bg-white/5 p-4 flex items-center justify-center">
+        <div className="relative h-72 3xl:h-96 overflow-hidden bg-white/5 p-4 flex items-center justify-center">
           <motion.img 
             style={{ translateZ: "50px" }}
             src={project.projectImage} 
@@ -71,16 +71,16 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, index }) =>
         </div>
 
         {/* Content Showcase */}
-        <div className="p-8 flex flex-col flex-1 z-10" style={{ transformStyle: "preserve-3d" }}>
+        <div className="p-8 3xl:p-12 flex flex-col flex-1 z-10" style={{ transformStyle: "preserve-3d" }}>
           <motion.h3 
             style={{ translateZ: "30px" }}
-            className="text-3xl font-bold text-white mb-3 group-hover:text-[#FF4D4D] transition-colors"
+            className="text-3xl 3xl:text-4xl font-bold text-white mb-3 group-hover:text-[#FF4D4D] transition-colors"
           >
             {project.name}
           </motion.h3>
           <motion.p 
             style={{ translateZ: "20px" }}
-            className="text-white/60 mb-6 flex-1 text-lg leading-relaxed line-clamp-2"
+            className="text-white/60 mb-6 flex-1 text-lg 3xl:text-xl leading-relaxed line-clamp-2"
           >
             {project.shortDescription}
           </motion.p>
@@ -89,7 +89,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick, index }) =>
             {project.technologies.slice(0, 4).map((tech: string, idx: number) => (
               <span 
                 key={idx}
-                className="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-white/10 text-white/80"
+                className="text-xs 3xl:text-sm font-bold uppercase tracking-wider px-3 py-1 3xl:px-4 3xl:py-2 rounded-full bg-white/10 text-white/80"
               >
                 {tech}
               </span>
