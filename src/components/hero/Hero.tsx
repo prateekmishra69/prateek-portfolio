@@ -22,12 +22,12 @@ const Hero = () => {
       {/* Dim Background when Speaking */}
       <div className={`absolute inset-0 z-0 transition-colors duration-1000 pointer-events-none ${isSpeaking ? 'bg-black/60 backdrop-blur-sm' : 'bg-transparent'}`} />
 
-      <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 xl:gap-16 2xl:gap-24 3xl:gap-32 h-full">
+      <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 2xl:gap-24 3xl:gap-32 h-full">
         
         {/* LEFT SIDE: Typography & CTA */}
         <motion.div 
           style={{ y: yText }}
-          className="w-full lg:flex-1 flex flex-col justify-center z-20"
+          className="w-full lg:w-[55%] flex flex-col justify-center z-20"
         >
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -98,7 +98,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="w-full lg:w-auto flex flex-col items-center lg:items-end justify-center z-20 gap-6 mt-8 lg:mt-0"
+          className="w-full lg:w-[45%] flex flex-col items-center lg:items-end justify-center z-20 gap-6 mt-8 lg:mt-0"
           onMouseEnter={() => setIsAvatarHovered(true)}
           onMouseLeave={() => setIsAvatarHovered(false)}
         >
@@ -108,12 +108,12 @@ const Hero = () => {
             <TalkingAvatar 
               imageUrl="/images/prateek-profile.jpg" 
               isSpeaking={isSpeaking} 
-              className="w-[280px] sm:w-[350px] lg:w-[320px] xl:w-[400px] 2xl:w-[500px] 3xl:w-[600px]"
+              className="w-[280px] sm:w-[350px] lg:w-[400px] 2xl:w-[500px] 3xl:w-[600px]"
             />
           </div>
           
           {/* Voice Intro Component (Meet Prateek) */}
-          <div className="w-[280px] sm:w-[350px] lg:w-[320px] xl:w-[400px] 2xl:w-[500px] 3xl:w-[600px] flex justify-center">
+          <div className="w-[280px] sm:w-[350px] lg:w-[400px] 2xl:w-[500px] 3xl:w-[600px] flex justify-center">
             <VoiceIntroduction onSpeakingChange={setIsSpeaking} />
           </div>
         </motion.div>
