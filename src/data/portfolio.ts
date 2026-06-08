@@ -117,7 +117,7 @@ export const portfolio = {
   ],
   skills: {
     programmingLanguages: ["Python", "Java", "C++", "JavaScript"],
-    frontend: ["React", "HTML", "CSS", "TailwindCSS", "Bootstrap"],
+    frontend: ["Next.js", "React", "HTML", "CSS", "TailwindCSS", "Bootstrap"],
     backend: ["Node.js", "Express.js", "Django"],
     databases: ["MongoDB", "PostgreSQL"],
     cloud: ["AWS"],
