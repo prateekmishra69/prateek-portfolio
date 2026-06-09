@@ -59,7 +59,7 @@ export const portfolio = {
   ],
   experience: [
     {
-      company: "NALCO (A Maharatna PSU)",
+      company: "NALCO (A Navaratna PSU)",
       role: "Software Development Intern",
       duration: "May 2026 - June 2026",
       responsibilities: [
