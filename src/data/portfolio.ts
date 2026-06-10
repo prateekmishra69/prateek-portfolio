@@ -2,7 +2,7 @@ export const portfolio = {
   personalInfo: {
     fullName: "Prateek Mishra",
     professionalTitle: "Full Stack Developer | AWS Certified Cloud Practitioner | AI & ML Enthusiast",
-    email: "prateekmmishra0412@gmail.com",
+    email: "prateekmmishra0406@gmail.com",
     phoneNumber: "+91 6371019959",
     location: "Koraput, Odisha, India",
   },

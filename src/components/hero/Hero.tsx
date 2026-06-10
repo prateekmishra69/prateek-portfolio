@@ -5,12 +5,13 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import { FaGithub as Github, FaLinkedin as Linkedin } from 'react-icons/fa';
 import { portfolio } from '@/data/portfolio';
-import VoiceIntroduction from '../avatar/VoiceIntroduction';
+import VideoControls, { VideoStatus } from '../avatar/VideoControls';
 import TalkingAvatar from '../avatar/TalkingAvatar';
 import { MagneticButton } from '../ui/MagneticButton';
 
 const Hero = () => {
-  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [videoStatus, setVideoStatus] = useState<VideoStatus>('idle');
+  const [isMuted, setIsMuted] = useState(false);
   const [isAvatarHovered, setIsAvatarHovered] = useState(false);
   const { personalInfo, heroContent, socialLinks } = portfolio;
   
@@ -19,8 +20,8 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
-      {/* Dim Background when Speaking */}
-      <div className={`absolute inset-0 z-0 transition-colors duration-1000 pointer-events-none ${isSpeaking ? 'bg-black/60 backdrop-blur-sm' : 'bg-transparent'}`} />
+      {/* Dim Background when Video Playing */}
+      <div className={`absolute inset-0 z-0 transition-colors duration-1000 pointer-events-none ${videoStatus === 'playing' ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'}`} />
 
       <div className="container mx-auto px-6 max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 2xl:gap-24 3xl:gap-32 h-full">
         
@@ -108,14 +109,21 @@ const Hero = () => {
               <div className="absolute inset-0 bg-gradient-to-tr from-[#FF4D4D]/20 to-[#7928CA]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl blur-2xl -z-10" />
               <TalkingAvatar 
                 imageUrl="/images/prateek-profile.jpg" 
-                isSpeaking={isSpeaking} 
+                videoStatus={videoStatus}
+                isMuted={isMuted}
+                onVideoStatusChange={setVideoStatus}
                 className="w-[280px] sm:w-[350px] lg:w-[400px] 2xl:w-[500px] 3xl:w-[600px]"
               />
             </div>
             
-            {/* Voice Intro Component (Meet Prateek) */}
+            {/* Video Control Button */}
             <div className="w-full flex justify-center">
-              <VoiceIntroduction onSpeakingChange={setIsSpeaking} />
+              <VideoControls 
+                status={videoStatus} 
+                isMuted={isMuted}
+                onPlayToggle={() => setVideoStatus(videoStatus === 'playing' ? 'idle' : 'playing')} 
+                onMuteToggle={() => setIsMuted(!isMuted)}
+              />
             </div>
           </div>
         </motion.div>
