@@ -50,6 +50,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({ status, isMuted, onPlayTo
     <div className="flex flex-col gap-4 w-full items-center">
       <div className="flex flex-row items-center justify-center gap-3 w-full py-2">
         <button 
+          suppressHydrationWarning
           onClick={onPlayToggle}
           disabled={status === 'error'}
           className="w-[240px] group relative flex items-center justify-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all px-6 py-4 rounded-full overflow-hidden text-white font-bold shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] z-10 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -62,6 +63,7 @@ const VideoControls: React.FC<VideoControlsProps> = ({ status, isMuted, onPlayTo
 
         {/* Mute/Unmute Button snug next to it */}
         <button
+          suppressHydrationWarning
           onClick={onMuteToggle}
           className="relative flex items-center justify-center bg-white/5 backdrop-blur-md border border-white/10 hover:border-white/30 hover:bg-white/10 transition-all w-12 h-12 shrink-0 rounded-full overflow-hidden text-white shadow-[0_0_20px_rgba(255,255,255,0.05)] hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] z-10"
           title={isMuted ? "Unmute" : "Mute"}
