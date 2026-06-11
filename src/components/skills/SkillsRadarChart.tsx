@@ -29,7 +29,7 @@ const SkillsRadarChart: React.FC<RadarDataProps> = ({ data }) => {
             color: 'white'
           }}
           itemStyle={{ color: '#06b6d4' }}
-          formatter={(value: number) => [`${value}% Relative Strength`, 'Proficiency']}
+          formatter={(value) => [`${value ?? 0}% Relative Strength`, 'Proficiency']}
         />
         <Radar
           name="Strength"
