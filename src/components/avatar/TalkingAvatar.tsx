@@ -91,7 +91,7 @@ const TalkingAvatar: React.FC<TalkingAvatarProps> = ({
 
   return (
     <div 
-      className={`relative flex items-center justify-center w-full max-w-[320px] lg:max-w-[400px] aspect-square mx-auto perspective-[1200px] ${className}`}
+      className={`relative flex items-center justify-center w-full aspect-square mx-auto perspective-[1200px] ${className}`}
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}

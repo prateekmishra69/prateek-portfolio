@@ -47,8 +47,8 @@ const VideoControls: React.FC<VideoControlsProps> = ({ status, isMuted, onPlayTo
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full items-center">
-      <div className="flex flex-row items-center justify-center gap-3 w-full py-2">
+    <div className="flex flex-col gap-2 md:gap-4 w-full items-center">
+      <div className="flex flex-row items-center justify-center gap-3 w-full py-0 md:py-2 mt-4 md:mt-0">
         <button 
           suppressHydrationWarning
           onClick={onPlayToggle}
