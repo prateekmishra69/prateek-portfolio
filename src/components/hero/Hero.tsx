@@ -19,11 +19,11 @@ const Hero = () => {
   const yText = useTransform(scrollYProgress, [0, 1], [0, 150]);
 
   return (
-    <section id="hero" className="relative min-h-[100dvh] md:min-h-screen flex items-center pt-20 md:pt-24 pb-6 md:pb-12 overflow-hidden">
+    <section id="hero" className="relative min-h-auto lg:min-h-screen flex items-start lg:items-center pt-20 lg:pt-24 pb-8 lg:pb-12 overflow-hidden">
       {/* Dim Background when Video Playing */}
       <div className={`absolute inset-0 z-0 transition-colors duration-1000 pointer-events-none ${videoStatus === 'playing' ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'}`} />
 
-      <div className="container mx-auto px-6 max-w-7xl xl:max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 md:gap-12 lg:gap-16 2xl:gap-24 h-full">
+      <div className="container mx-auto px-6 max-w-7xl xl:max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-4 md:gap-8 lg:gap-16 2xl:gap-24 h-auto lg:h-full">
         
         {/* LEFT SIDE: Typography & CTA */}
         <motion.div 
@@ -100,7 +100,7 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-16 xl:pr-24 z-20 mt-8 lg:mt-0"
+          className="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-16 xl:pr-24 z-20 mt-4 md:mt-6 lg:mt-0"
           onMouseEnter={() => setIsAvatarHovered(true)}
           onMouseLeave={() => setIsAvatarHovered(false)}
         >
