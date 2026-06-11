@@ -19,11 +19,11 @@ const Hero = () => {
   const yText = useTransform(scrollYProgress, [0, 1], [0, 150]);
 
   return (
-    <section id="hero" className="relative min-h-auto lg:min-h-screen flex items-start lg:items-center pt-20 lg:pt-24 pb-8 lg:pb-12 overflow-hidden">
+    <section id="hero" className="relative min-h-auto lg:min-h-screen flex items-start lg:items-center pt-16 lg:pt-24 pb-8 lg:pb-12 overflow-hidden">
       {/* Dim Background when Video Playing */}
       <div className={`absolute inset-0 z-0 transition-colors duration-1000 pointer-events-none ${videoStatus === 'playing' ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'}`} />
 
-      <div className="container mx-auto px-6 max-w-7xl xl:max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-4 md:gap-8 lg:gap-16 2xl:gap-24 h-auto lg:h-full">
+      <div className="container mx-auto px-6 max-w-7xl xl:max-w-7xl 2xl:max-w-[1600px] 3xl:max-w-[1800px] relative z-10 flex flex-col lg:flex-row items-center lg:items-center justify-between gap-0 lg:gap-16 2xl:gap-24 h-auto lg:h-full">
         
         {/* LEFT SIDE: Typography & CTA */}
         <motion.div 
@@ -88,7 +88,7 @@ const Hero = () => {
             </div>
 
             {/* Centered Socials perfectly under CTA on Mobile, beside CTA on Desktop */}
-            <div className="flex justify-center sm:justify-start gap-4 w-full sm:w-auto mt-2 sm:mt-0 sm:ml-4 pb-2 md:pb-0">
+            <div className="flex justify-center sm:justify-start gap-4 w-full sm:w-auto mt-2 sm:mt-0 sm:ml-4">
               <a href={socialLinks.github} target="_blank" className="p-3 3xl:p-4 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:text-[#FF4D4D] transition-colors"><Github className="w-5 h-5 2xl:w-6 2xl:h-6 3xl:w-8 3xl:h-8" /></a>
               <a href={socialLinks.linkedin} target="_blank" className="p-3 3xl:p-4 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 hover:text-[#FF4D4D] transition-colors"><Linkedin className="w-5 h-5 2xl:w-6 2xl:h-6 3xl:w-8 3xl:h-8" /></a>
             </div>
@@ -100,11 +100,11 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
-          className="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-16 xl:pr-24 z-20 mt-4 md:mt-6 lg:mt-0"
+          className="w-full lg:w-[45%] flex justify-center lg:justify-end lg:pr-16 xl:pr-24 z-20 mt-6 lg:mt-0"
           onMouseEnter={() => setIsAvatarHovered(true)}
           onMouseLeave={() => setIsAvatarHovered(false)}
         >
-          <div className="flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-3 lg:gap-6">
             {/* Glassmorphism Frame for Avatar */}
             <div className="relative p-2 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-2xl shadow-2xl group">
               <div className="absolute inset-0 bg-gradient-to-tr from-[#FF4D4D]/20 to-[#7928CA]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-3xl blur-2xl -z-10" />
